@@ -17,11 +17,13 @@ The app is bundled with Bootstrap v3.0.1, jQuery and Quill.js (broken)
 
 Installation
 ------------
-Clone this app to your local development environment
-``cd  tuxfun/`` and run  ``pip install -r requirements.txt``
-``cd tuxfun/tuxfun`` and edit your ``settings.py`` file:
-  Change the DATABASE NAME, USER and PASSWORD
-cd back to tuxfun/ and run python manage.py migrate blog 0002_blog_category to install your models
-Run the server  ``python manage.py runserver 8000``
-In your browser, got to http://localhost:8000/blog/home
+- Clone this app to your local development environment
+- ``cd  tuxfun/ `` and run  ``pip install -r requirements.txt``
+- `` cd tuxfun/tuxfun `` and edit your ``settings.py`` file:
+- Change the **DATABASE NAME**, **USER** and **PASSWORD**
+-  ``cd  tuxfun/ `` and run:
+- `` python manage.py migrate 0001_initial `` to install your models
+- `` python manage.py migrate blog 0002_blog_category `` to install your updated models
+- Run the server  `` python manage.py runserver 8000 ``
+- In your browser, got to ``http://localhost:8000/blog/home``
 
