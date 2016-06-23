@@ -7,6 +7,8 @@ class Post(models.Model):
     mod_date = models.DateTimeField()
     active  = models.BooleanField(default = True)
     category = models.CharField(max_length=50, default="linux")
+    likes = models.IntegerField(default=0)
+    shares = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.post_title

@@ -22,7 +22,19 @@ def blog(request):
     except(EmptyPage, InvalidPage):
         posts = paginator.page(paginator.num_pages)
 
-    return render(request, 'blog/index.html', {'posts':posts})
+    # breadcrumb feed
+    link = reverse('blog:home')
+    link1 = reverse('blog:index')
+
+    # block aside feeds
+    recent_5_posts = posts_list[:5]
+    recent_5_fun = posts_list.filter(category='fun')[:5]
+
+    context = {'posts':posts, 'recent_5_posts': recent_5_posts,
+               'recent_5_fun': recent_5_fun,
+               }
+
+    return render(request, 'blog/index.html', context)
 
 def home(request):
     return render(request, 'blog/home.html')
@@ -61,7 +73,19 @@ def category(request, category):
     except(EmptyPage, InvalidPage):
         posts = paginator.page(paginator.num_pages)
 
-    return render(request, 'blog/category.html', {'posts':posts})
+    # breadcrumb feed
+    link = reverse('blog:home')
+    link1 = reverse('blog:index')
+
+    # block aside feeds
+    recent_5_posts = posts_list[:5]
+    recent_5_fun = posts_list.filter(category='fun')[:5]
+
+    context = {'posts':posts, 'recent_5_posts': recent_5_posts,
+               'recent_5_fun': recent_5_fun,
+               }
+
+    return render(request, 'blog/index.html', context)
 
 def detail(request, question_id):
     post = get_object_or_404(Post, pk=question_id)
@@ -104,12 +128,30 @@ def delete(request, question_id):
     return HttpResponseRedirect(reverse('blog:index'))
 
 def comment(request, question_id):
-    if request.method == "POST":
+    if request.method == "GET":
+        return HttpResponseRedirect(reverse('blog:detail', args=(question_id,)))
+
+    elif request.method == "POST":
         now = timezone.now()
         post = get_object_or_404(Post, pk=question_id)
         post.comment_set.create(comment_text=request.POST['comment'],pub_date=now,mod_date=now)
 
         return HttpResponseRedirect(reverse('blog:detail', args=(post.id,)))
+
+
+def like(request, question_id):
+    post = get_object_or_404(Post, pk=question_id)
+    post.likes += 1
+    post.save()
+    return HttpResponseRedirect(reverse('blog:detail', args=(post.id,)))
+
+def share(request, question_id):
+    post = get_object_or_404(Post, pk= question_id)
+    post.pub_date = timezone.now()
+    post.shares += 1
+    post.save()
+    return HttpResponseRedirect(reverse('blog:detail', args=(post.id,)))
+
 
 def edit_comment(request, comment_id):
     now = timezone.now()

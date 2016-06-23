@@ -5,8 +5,8 @@
     <article>
       <form action="{% url 'blog:edit' post.id %}" method="post">
         {% csrf_token %}
-        <input class="form-control" type="text" name="post_title" placeholder="{{ post.post_title }}"  required></br>
-        <input class="form-control" type="text" name="post_text" placeholder="{{ post.post_text }}"  required></br>
+        <input class="form-control" type="text" name="post_title" value="{{ post.post_title }}"  required></br>
+        <textarea class="form-control" type="text" name="post_text"  required>{{ post.post_text }}</textarea></br>
         <button class="form-control btn btn-info" type="submit">Publish</button>
       </form>
     </article>
@@ -14,4 +14,17 @@
     <p>Send Default Data to form</p>
   {% endif %}
 
+{% endblock %}
+
+{% block aside %}
+  <h2>Popular on Tuxfun</h2>
+
+  {% for post in recent_5_posts %}
+    <p><a href="{% url "blog:detail" post.id %}">{{ post.post_title }}</a></p>
+  {% endfor %}
+
+  <h2>Popular fun articles</h2>
+  {% for post in recent_5_fun  %}
+    <p><a href="{% url 'blog:detail' post.id %}">{{ post.post_title }}</a></p>
+  {% endfor %}
 {% endblock %}

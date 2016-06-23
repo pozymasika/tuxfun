@@ -4,7 +4,7 @@
     {% load staticfiles %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tuxfun Home - Linux and Programming News</title>
-    <link rel='stylesheet' href="{% static 'blog/bootstrap.min.css' %}" >
+    <link rel='stylesheet' href="{% static 'blog/bootstrap/bootstrap.min.css' %}" >
     <link rel='stylesheet' href="{% static 'blog/quill.snow.css' %}">
     <link rel='stylesheet' href="{% static 'blog/main.css' %}">
     <link rel='stylesheet' href="{% static 'blog/font-awesome.min.css' %}">
@@ -31,12 +31,12 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="{% url 'blog:category' 'linux' %}"><span class="glyphicon glyphicon-apple"></span> Linux</a></li>
-                <li><a href="{% url 'blog:category' 'programming' %}"><span class="glyphicon glyphicon-console"></span> Programming</a></li>
+                <li><a href="{% url 'blog:category' 'linux' %}"><span class="glyphicon glyphicon-cog"></span> Linux</a></li>
+                <li><a href="{% url 'blog:category' 'programming' %}"><span class="glyphicon glyphicon-stats"></span> Programming</a></li>
                 <li><a href="{% url 'blog:category' 'web' %}"><span class="glyphicon glyphicon-globe"></span> Web</a></li>
                 <li class="divider"></li>
                 <li><a href="{% url 'blog:category' 'thoughts' %}"><span class="glyphicon glyphicon-flag"></span> Thoughts</a></li>
-                <li><a href="{% url 'blog:category' 'fun' %}"><span class="glyphicon glyphicon-sunglasses"></span> Fun</a></li>
+                <li><a href="{% url 'blog:category' 'fun' %}"><span class="glyphicon glyphicon-user"></span> Fun</a></li>
               </ul>
             </li>
             <li><a href="{% url 'blog:add' %}"><span class="glyphicon glyphicon-pencil"></span> Add Blog</a></li>
@@ -48,15 +48,39 @@
 
     </header>
 
-      <div class="container">
-        {% block content %}
+    <div class="page-header">
 
-        {% endblock %}
+    </div>
+
+      <div class="container">
+
+        <!-- <ul class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul> -->
+
+        <div class="row">
+          <div class="col-md-9">
+            {% block content %}
+
+            {% endblock %}
+          </div>
+
+          <div class="col-md-3 col-sm-3">
+            {% block aside %}
+              <p><a href=#>Recents</a></p>
+              <p><a href=#>Archive</a></p>
+              <p><a href=#>About</a></p>
+              <p><a href=#>Contacts</a></p>
+            {% endblock %}
+          </div>
+        </div>
+
       </div>
 
     </div>
     <script src="{% static 'blog/jquery.min.js' %}"></script>
-    <script src="{% static 'blog/bootstrap.min.js' %}"></script>
+    <script src="{% static 'blog/bootstrap/bootstrap.min.js' %}"></script>
     <script src="{% static 'blog/quill.js' %}"></script>
 
     {# initialise Quil Editor #}

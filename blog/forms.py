@@ -1,4 +1,5 @@
 from django import forms
 
-class PostImageForm(forms.Form):
-    image = forms.FileField(label='Select a Post Image')
+class PostAddition(forms.Form):
+    title = forms.CharField(required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    category = 

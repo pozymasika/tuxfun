@@ -3,7 +3,7 @@
 {% block content %}
 	<form action="{% url 'blog:edit_comment' comment.id %}" method="post">
 		{% csrf_token %}
-		<input class="form-control" type="text" name="comment" placeholder="{{ comment.comment_text }}"><br>
+		<input class="form-control" type="text" name="comment" value="{{ comment.comment_text }}" required><br>
 		<button class="form-control btn btn-info" type="submit">Publish</button>
 	</form>
 {% endblock %}
