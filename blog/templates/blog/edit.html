@@ -1,0 +1,17 @@
+{% extends 'blog/index.html' %}
+
+{% block content %}
+  {% if post %}
+    <article>
+      <form action="{% url 'blog:edit' post.id %}" method="post">
+        {% csrf_token %}
+        <input class="form-control" type="text" name="post_title" placeholder="{{ post.post_title }}"  required></br>
+        <input class="form-control" type="text" name="post_text" placeholder="{{ post.post_text }}"  required></br>
+        <button class="form-control btn btn-info" type="submit">Publish</button>
+      </form>
+    </article>
+  {% else %}
+    <p>Send Default Data to form</p>
+  {% endif %}
+
+{% endblock %}

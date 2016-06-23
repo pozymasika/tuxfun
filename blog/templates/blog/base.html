@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuxfun Home - Linux and Programming News</title>
+    <link rel='stylesheet' href="{% static 'blog/bootstrap.min.css' %}" >
+    <link rel='stylesheet' href="{% static 'blog/quill.snow.css' %}">
+    <link rel='stylesheet' href="{% static 'blog/main.css' %}">
+    <meta charset="utf-8">
+  </head>
+  <body>
+
+    <header>
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#blog-menu">
+            <span class="sr-only">Menu</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'blog:home' %}">TuxFun</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="blog-menu">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{% url 'blog:home' %}">Home</a></li>
+            <li><a href="{% url 'blog:index' %}">Recent</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'blog:category' 'linux' %}">Linux</a></li>
+                <li><a href="{% url 'blog:category' 'programming' %}">Programming</a></li>
+                <li><a href="{% url 'blog:category' 'web' %}">Web</a></li>
+                <li class="divider"></li>
+                <li><a href="{% url 'blog:category' 'thoughts' %}">Thoughts</a></li>
+                <li><a href="{% url 'blog:category' 'fun' %}">Fun</a></li>
+              </ul>
+            </li>
+            <li><a href="{% url 'blog:add' %}">Add Blog</a></li>
+            <li><a href="{% url 'blog:trash' %}">Trash</a></li>
+          </ul>
+        </div>
+
+      </nav>
+
+    </header>
+
+      <div class="container">
+        {% block content %}
+
+        {% endblock %}
+      </div>
+
+    </div>
+    <script src="{% static 'blog/jquery.min.js' %}"></script>
+    <script src="{% static 'blog/bootstrap.min.js' %}"></script>
+    <script src="{% static 'blog/quill.js' %}"></script>
+
+    {# initialise Quil Editor #}
+    <script>
+      var editor = new Quill('#editor', {
+        modules: { toolbar: '#toolbar' },
+        theme: 'snow'
+      });
+    </script>
+
+  </body>
+</html>

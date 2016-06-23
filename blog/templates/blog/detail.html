@@ -1,0 +1,39 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  <article>
+    {% if post %}
+      <p>{{ post.post_title }}</p>
+      <p><small><strong>At {{ post.pub_date }}</strong></small>
+        in category <a href="{% url 'blog:category' post.category %}">{{ post.category }}</a>
+        | <a href="{% url 'blog:edit' post.id  %}">Edit Post</a></p>
+      <p>{{ post.post_text }}</p>
+      <p><a href="{% url 'blog:delete' post.id %}">Delete</a></p>
+
+      {# <form action="./comment" method="post">#}
+      {% block comment_form %}
+      <form action="{% url 'blog:comment' post.id %}" method="post">
+        {% csrf_token %}
+        <input class="form-control" type="text" name="comment" placeholder="comment..."><br>
+        <button class="form-control btn btn-info" type="submit">Publish</button>
+      </form>
+      {% endblock %}
+
+      <section>
+        {% if post.comment_set.all.0 != None %}
+          {% for comment in comments %}
+            <p>{{ comment.comment_text }} <u><small>{{ comment.pub_date }}</small></u>
+               | <a href="{% url 'blog:edit_comment' comment.id %}">Edit</a>
+               | <a href="{% url 'blog:del_comment' comment.id %}">Delete</a>
+            </p>
+          {% endfor %}
+        {% else %}
+          <p> No comments yet!</p>
+        {% endif %}
+      </section>
+    {% else %}
+      <p>Post not found.Back <a href="{% url 'blog:index' %}">Home</a> </p>
+    {% endif %}
+  </article>
+
+{% endblock %}

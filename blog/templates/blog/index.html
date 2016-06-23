@@ -1,0 +1,41 @@
+{% extends 'blog/base.html' %}
+    {% block content %}
+          {% if posts %}
+            <article>
+              {% for post in posts %}
+                <content>
+                  {# <img class="thumbnail" src="/home/mark/Documents/Python/django/tuxfun/blog/static/img/herc.jpg">#}
+                  {{ post.id }}: <a href="{% url 'blog:detail' post.id %}">{{ post.post_title }}</a>
+                  in category <a href="{% url 'blog:category' post.category %}">{{ post.category }}</a> <br>
+                  <small><strong>Posted {{ post.pub_date }}</small></strong> <br>
+                  {{ post.post_text }}<hr>
+                </content>
+              {% endfor %}
+            </article>
+          {% else %}
+            <article>
+               <content>
+                 <p>No Posts Yet</p>
+               </content>
+            </article>
+          {% endif %}
+
+            <ul class="pagination">
+              {% if posts.has_previous %}
+                <li><a href="?page={{ posts.previous_page_number }}">&laquo;</a></li>
+              {% endif %}
+              {% for pg in posts.paginator.page_range %}
+
+                {% if posts.number == pg %}
+                    <li class="active"><a href="?page={{ pg }}">{{ pg }}</a></li>
+                {% else %}
+                  <li><a href="?page={{ pg }}">{{ pg }}</a></li>
+                {% endif %}
+
+                {% endfor %}
+                {% if posts.has_next %}
+                  <li><a href="?page={{ posts.next_page_number }}">&raquo;</a></li>
+                {% endif %}
+            </ul>
+            
+    {% endblock %}

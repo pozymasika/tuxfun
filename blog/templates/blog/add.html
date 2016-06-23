@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  <article>
+    <form action="{% url 'blog:add' %}" method="post">
+      {% csrf_token %}
+      <input class="form-control" type="text" name="post_title" placeholder="Title" required>
+      <label for="category">Category</label>
+      <select class="form-control" name="category">
+        <option value="linux">Linux</option>
+        <option value="programming">Programming</option>
+        <option value="web">Web</option>
+        <option value="thoughts">Thoughts</option>
+        <option value="fun">Fun</option>
+      </select> <br>
+      	<div id="toolbar">
+          <button class="ql-bold">Bold</button>
+          <button class="ql-italic">Italic</button>
+      	</div>
+        <textarea  id="editor" class="form-control"  cols="3" type="text" name="post_text" placeholder="Write new blog post..." required></textarea><br>
+      <button class="form-control btn btn-info" type="submit">Publish</button>
+    </form>
+  </article>
+
+{% endblock %}

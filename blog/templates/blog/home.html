@@ -1,0 +1,10 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+      <div class='jumbotron'>
+        <h1>You are at Tuxfun!</h1>
+        <p>Here, Programming, Linux, OpenSource and the Web are Always Fun!</p>
+        <button class="btn btn-link btn-info"><a href="{% url 'blog:index' %}">Learn more</a></button>
+      </div>
+
+{% endblock %}
