@@ -89,6 +89,8 @@
         modules: { toolbar: '#toolbar' },
         theme: 'snow'
       });
+      //prevent quill submit on toolbar click
+      $('#toolbar').on('click', 'button', function(e) { e && e.preventDefault() })
     </script>
 
   </body>
